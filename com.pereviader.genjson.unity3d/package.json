@@ -1,9 +1,9 @@
 {
     "name": "com.pereviader.genjson.unity3d",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "displayName": "GenJson",
     "description": "GenJson is a zero-allocation, high-performance C# Source Generator library that automatically creates ToJson() and FromJson() methods for your classes and structs.",
-    "unity": "2022.3",
+    "unity": "6000.0",
     "license": "MIT",
     "documentationUrl": "https://github.com/PereViader/GenJson",
     "changelogUrl": "https://github.com/PereViader/GenJson/commits/main/",

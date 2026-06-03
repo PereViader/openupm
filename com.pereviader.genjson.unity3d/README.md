@@ -1,4 +1,4 @@
-[![Test and publish](https://github.com/PereViader/GenJson/actions/workflows/TestAndPublish.yml/badge.svg)](https://github.com/PereViader/GenJson/actions/workflows/TestAndPublish.yml) ![Unity version 2022.3.29](https://img.shields.io/badge/Unity-2022.3.29-57b9d3.svg?style=flat&logo=unity) ![GitHub Release](https://img.shields.io/github/v/release/PereViader/GenJson?include_prereleases) [![NuGet](https://img.shields.io/nuget/v/GenJson?label=nuget)](https://www.nuget.org/packages/GenJson/) [![openupm](https://img.shields.io/npm/v/com.pereviader.genjson.unity3d?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.pereviader.genjson.unity3d/)
+[![Test and publish](https://github.com/PereViader/GenJson/actions/workflows/TestAndPublish.yml/badge.svg)](https://github.com/PereViader/GenJson/actions/workflows/TestAndPublish.yml) ![Unity version 6](https://img.shields.io/badge/Unity-6-57b9d3.svg?style=flat&logo=unity) ![GitHub Release](https://img.shields.io/github/v/release/PereViader/GenJson?include_prereleases) [![NuGet](https://img.shields.io/nuget/v/GenJson?label=nuget)](https://www.nuget.org/packages/GenJson/) [![openupm](https://img.shields.io/npm/v/com.pereviader.genjson.unity3d?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.pereviader.genjson.unity3d/)
 
 
 # GenJson
@@ -16,8 +16,8 @@ This project is compatible with both pure C# projects and Unity3D.
 - **Rich Type Support**:
   - Primitives: `int`, `string`, `bool`, `double`, `float`, `decimal` etc
   - Standard Types: `Guid`, `Uri`, `Version`, `DateTime`, `TimeSpan`, `DateTimeOffset`
-  - Dictionaries: `IReadOnlyDictionary<K, V>` 
-  - Collections: `IEnumerable<T>`
+  - Dictionaries: `IDictionary<K, V>` 
+  - Collections: `ICollection<T>`
   - Enums: Serialized as backing type (default) or string
   - Nested Objects: Recursive serialization of complex object graphs
 
@@ -29,23 +29,28 @@ This project is compatible with both pure C# projects and Unity3D.
 
 | Method                     | Mean [ns]  | Error [ns] | StdDev [ns] | Median [ns] | Allocated [KB] |
 |--------------------------- |-----------:|-----------:|------------:|------------:|---------------:|
-| GenJson_ToJson             |   976.2 ns |   19.35 ns |    19.87 ns |    981.0 ns |        1.72 KB |
-| Utf8Json_ToJson            |   980.8 ns |   19.05 ns |    20.38 ns |    976.5 ns |        1.63 KB |
-| MicrosoftJson_ToJson       | 1,185.5 ns |   23.59 ns |    29.84 ns |  1,167.9 ns |        1.92 KB |
-| NewtonsoftJson_ToJson      | 2,248.1 ns |   44.63 ns |    56.45 ns |  2,223.1 ns |        5.95 KB |
-| GenJson_FromJson           | 1,020.1 ns |   17.45 ns |    16.32 ns |  1,028.3 ns |        1.95 KB |
-| MicrosoftJson_FromJson     | 2,328.0 ns |   35.14 ns |    32.87 ns |  2,309.9 ns |           3 KB |
-| NewtonsoftJson_FromJson    | 3,901.6 ns |   76.95 ns |    88.62 ns |  3,878.9 ns |        8.23 KB |
-| Utf8Json_FromJson          | 1,698.6 ns |   19.94 ns |    18.65 ns |  1,697.9 ns |        3.13 KB |
-| GenJson_FromJsonUtf8       |   886.3 ns |   13.70 ns |    12.14 ns |    887.7 ns |        1.95 KB |
-| Utf8Json_FromJsonUtf8      | 1,624.5 ns |   30.76 ns |    28.77 ns |  1,613.3 ns |         2.3 KB |
-| MicrosoftJson_FromJsonUtf8 | 2,309.3 ns |   45.93 ns |    45.11 ns |  2,307.7 ns |           3 KB |
+| GenJson_ToJson             |   653.2 ns |   10.99 ns |    10.28 ns |    649.9 ns |         1.6 KB |
+| Utf8Json_ToJson            |   982.8 ns |   19.38 ns |    21.54 ns |    978.1 ns |        1.63 KB |
+| MicrosoftJson_ToJson       | 1,183.4 ns |   23.34 ns |    24.98 ns |  1,178.5 ns |        1.92 KB |
+| NewtonsoftJson_ToJson      | 2,255.5 ns |   44.86 ns |    58.33 ns |  2,261.5 ns |        5.95 KB |
+| GenJson_ToJsonUtf8         |   724.6 ns |   14.04 ns |    15.02 ns |    721.2 ns |        0.81 KB |
+| Utf8Json_ToJsonUtf8        |   965.1 ns |   18.66 ns |    18.33 ns |    968.4 ns |        0.83 KB |
+| MicrosoftJson_ToJsonUtf8   | 1,151.4 ns |   22.30 ns |    26.55 ns |  1,148.7 ns |        1.13 KB |
+| MessagePack_Serialize      |   386.1 ns |    3.36 ns |     3.14 ns |    385.6 ns |        0.59 KB |
+| GenJson_FromJson           | 1,584.9 ns |   11.53 ns |    10.79 ns |  1,584.2 ns |        1.95 KB |
+| Utf8Json_FromJson          | 1,632.1 ns |   16.79 ns |    15.70 ns |  1,626.5 ns |        3.13 KB |
+| MicrosoftJson_FromJson     | 2,292.2 ns |   20.31 ns |    16.96 ns |  2,289.1 ns |           3 KB |
+| NewtonsoftJson_FromJson    | 4,068.7 ns |   31.04 ns |    29.03 ns |  4,070.6 ns |        8.23 KB |
+| GenJson_FromJsonUtf8       | 1,282.9 ns |    5.68 ns |     4.75 ns |  1,283.2 ns |        1.95 KB |
+| Utf8Json_FromJsonUtf8      | 1,621.9 ns |   17.21 ns |    15.26 ns |  1,617.5 ns |         2.3 KB |
+| MicrosoftJson_FromJsonUtf8 | 2,234.2 ns |   18.91 ns |    16.76 ns |  2,228.5 ns |           3 KB |
+| MessagePack_Deserialize    |   835.5 ns |    7.55 ns |     7.07 ns |    832.4 ns |        1.95 KB |
 
 - [System.Text.Json](https://learn.microsoft.com/en-us/dotnet/api/system.text.json)
 - [Newtonsoft.Json](https://www.newtonsoft.com/json)
 - [Utf8Json](https://github.com/Cryptisk/Utf8Json)
 
-Note: GenJson_ToJson consumes slightly more memory than Utf8Json_ToJson due to GenJson adding an extra `$Count` property so that the receiving end can optimize the deserialization of the collections.
+Note: When count optimization is enabled (by passing useCountOptimization: true), GenJson_ToJson consumes slightly more memory than Utf8Json_ToJson due to GenJson adding an extra `$Count` property so that the receiving end can optimize the deserialization of the collections.
 
 ## Installation
 
@@ -199,26 +204,146 @@ When an enum is used as a `Dictionary` key (e.g., `Dictionary<Status, int>`), an
 
 You can define custom logic for serializing and deserializing specific properties or entire types using the `[GenJsonConverter]` attribute.
 
-1.  Define a class with static methods `GetSize`, `WriteJson`, and `FromJson` (and their UTF8 variants if needed).
-2.  Apply `[GenJsonConverter(typeof(YourConverter))]` to the property, class, or struct.
+Since GenJson generates both string-based and UTF-8 byte-based serialization/deserialization code, a custom converter must define **both** sets of static methods.
+
+#### Required Converter Contract
+
+For any type `T` being converted, the converter class must implement the following six static methods:
+
+##### 1. String-Based Methods (`char`)
+*   `public static int GetSize(T value)`: Calculates the exact number of characters that `WriteJson` will write.
+*   `public static void WriteJson(Span<char> span, ref int index, T value)`: Writes the value to the span starting at `index`, and advances `index` by the number of characters written.
+*   `public static T FromJson(ReadOnlySpan<char> span, ref int index)`: Parses the value from the span starting at `index`, advances `index` past the parsed token, and returns the value.
+
+##### 2. UTF-8 Byte-Based Methods (`byte`)
+*   `public static int GetSizeUtf8(T value)`: Calculates the exact number of bytes that `WriteJson` will write.
+*   `public static void WriteJsonUtf8(Span<byte> span, ref int index, T value)`: Writes the UTF-8 bytes to the span starting at `index`, and advances `index` by the number of bytes written.
+*   `public static T FromJsonUtf8(ReadOnlySpan<byte> span, ref int index)`: Parses the value from the byte span starting at `index`, advances `index` past the parsed token, and returns the value.
+
+> [!IMPORTANT]
+> - `GetSize`/`GetSizeUtf8` must return the exact length of the written output. If they return a value smaller than what is actually written, memory corruption or exceptions will occur. If they return a larger value, the resulting JSON string or byte array will have extra unused allocated space.
+> - The methods must always advance `index` by the exact number of elements (characters or bytes) written or parsed.
+
+#### Example: Boolean as `1` or `0`
+
+Here is a simple converter that serializes `bool` properties as `1` (true) or `0` (false) instead of `true`/`false`.
 
 ```csharp
-public static class MyCustomConverter
-{
-    public static int GetSize(int value) => ... // Calculate size
-    public static void WriteJson(Span<char> span, ref int index, int value) => ... // Write to span
-    public static int FromJson(ReadOnlySpan<char> span, ref int index) => ... // Read from span
-}
+using System;
 
-[GenJson]
-public partial class MyClass
+public static class BoolToIntConverter
 {
-    [GenJsonConverter(typeof(MyCustomConverter))]
-    public int MyProperty { get; set; }
+    // --- String-based conversion (char) ---
+
+    public static int GetSize(bool value) => 1;
+
+    public static void WriteJson(Span<char> span, ref int index, bool value)
+    {
+        span[index++] = value ? '1' : '0';
+    }
+
+    public static bool FromJson(ReadOnlySpan<char> span, ref int index)
+    {
+        char c = span[index++];
+        return c == '1';
+    }
+
+    // --- UTF-8 Byte-based conversion (byte) ---
+
+    public static int GetSizeUtf8(bool value) => 1;
+
+    public static void WriteJsonUtf8(Span<byte> span, ref int index, bool value)
+    {
+        span[index++] = value ? (byte)'1' : (byte)'0';
+    }
+
+    public static bool FromJsonUtf8(ReadOnlySpan<byte> span, ref int index)
+    {
+        byte b = span[index++];
+        return b == (byte)'1';
+    }
 }
 ```
 
-You can also apply it directly to a type, and override it on specific properties if needed:
+#### Example: DateTime as Unix Epoch Milliseconds
+
+Here is a more advanced example that serializes `DateTime` as Unix epoch milliseconds (a JSON number).
+
+```csharp
+using System;
+using System.Buffers.Text;
+
+public static class DateTimeEpochConverter
+{
+    // --- String-based conversion (char) ---
+
+    public static int GetSize(DateTime value)
+    {
+        long ms = new DateTimeOffset(value).ToUnixTimeMilliseconds();
+        // Calculate number of digits without allocation
+        int len = 0;
+        if (ms <= 0) { len++; ms = -ms; }
+        while (ms > 0) { len++; ms /= 10; }
+        return len == 0 ? 1 : len;
+    }
+
+    public static void WriteJson(Span<char> span, ref int index, DateTime value)
+    {
+        long ms = new DateTimeOffset(value).ToUnixTimeMilliseconds();
+        ms.TryFormat(span.Slice(index), out var written);
+        index += written;
+    }
+
+    public static DateTime FromJson(ReadOnlySpan<char> span, ref int index)
+    {
+        int start = index;
+        while (index < span.Length && (char.IsDigit(span[index]) || span[index] == '-'))
+        {
+            index++;
+        }
+        long ms = long.Parse(span.Slice(start, index - start));
+        return DateTimeOffset.FromUnixTimeMilliseconds(ms).UtcDateTime;
+    }
+
+    // --- UTF-8 Byte-based conversion (byte) ---
+
+    public static int GetSizeUtf8(DateTime value) => GetSize(value);
+
+    public static void WriteJsonUtf8(Span<byte> span, ref int index, DateTime value)
+    {
+        long ms = new DateTimeOffset(value).ToUnixTimeMilliseconds();
+        Utf8Formatter.TryFormat(ms, span.Slice(index), out var written);
+        index += written;
+    }
+
+    public static DateTime FromJsonUtf8(ReadOnlySpan<byte> span, ref int index)
+    {
+        int start = index;
+        while (index < span.Length && ((span[index] >= (byte)'0' && span[index] <= (byte)'9') || span[index] == (byte)'-'))
+        {
+            index++;
+        }
+        Utf8Parser.TryParse(span.Slice(start, index - start), out long ms, out _);
+        return DateTimeOffset.FromUnixTimeMilliseconds(ms).UtcDateTime;
+    }
+}
+```
+
+Applying the custom converter using `[GenJsonConverter]`:
+
+```csharp
+[GenJson]
+public partial class MyClass
+{
+    [GenJsonConverter(typeof(BoolToIntConverter))]
+    public bool IsActive { get; set; }
+
+    [GenJsonConverter(typeof(DateTimeEpochConverter))]
+    public DateTime CreatedAt { get; set; }
+}
+```
+
+You can also apply the converter directly to a custom class or struct definition:
 
 ```csharp
 [GenJsonConverter(typeof(MyStructConverter))]
@@ -256,6 +381,9 @@ string json = product.ToJson();
 
 // You can also serialize directly to a UTF-8 byte array
 byte[] utf8Json = product.ToJsonUtf8();
+
+// You can enable collection count optimization by passing useCountOptimization: true
+string optimizedJson = product.ToJson(useCountOptimization: true);
 ```
 
 ### 8. Deserialization
@@ -268,6 +396,9 @@ Product product = Product.FromJson(json);
 // You can also deserialize directly from a UTF-8 byte span or array
 byte[] utf8Json = ... // e.g. from a network stream
 Product productUtf8 = Product.FromJsonUtf8(utf8Json);
+
+// If the JSON was serialized with count optimization, pass useCountOptimization: true to utilize it
+Product productOptimized = Product.FromJson(optimizedJson, useCountOptimization: true);
 ```
 
 > [!IMPORTANT]
@@ -359,26 +490,36 @@ public partial class Cat : Animal
 GenJson optimizes collection deserialization (Lists, Arrays, Dictionaries) by pre-allocating the collection with the exact size. This avoids resizing overhead during population.
 
 **How it works:**
-- **Serialization**: The generator automatically emits a hidden property named after the collection with a `$` prefix (e.g., `"$MyList": 5`) immediately before the collection property.
-- **Deserialization**: The parser reads this count property first and initializes the collection with the correct capacity (e.g., `new List<int>(5)`).
+- **Serialization**: When `useCountOptimization: true` is passed, the generator automatically emits a hidden property named after the collection with a `$` prefix (e.g., `"$MyList": 5`) immediately before the collection property.
+- **Deserialization**: When `useCountOptimization: true` is passed, the parser reads this count property first and initializes the collection with the correct capacity (e.g., `new List<int>(5)`).
 
 > [!NOTE]
-> GenJson can still parse standard JSON without the count property. If the property is missing, it will automatically fall back to counting the elements of the collection before doing the allocation.
+> GenJson can still parse standard JSON without the count property. If the property is missing, or if `useCountOptimization` is `false`, it will automatically fall back to counting the elements of the collection before doing the allocation.
 
-**Disabling Optimization:**
-To maintain strictly standard JSON or avoid extra metadata properties, apply the [GenJsonSkipCountOptimization] attribute to your class or struct.
+**Enabling Optimization:**
+By default, count optimization is disabled to maintain strictly standard JSON and avoid extra metadata properties. To enable it, pass `useCountOptimization: true` to the serialization and deserialization methods.
 
 > [!TIP] 
-> If the receiving end doesn't use count metadata, disabling this optimization speeds up ToJson execution and reduces memory allocations.
+> If the receiving end doesn't use count metadata, leaving count optimization disabled (the default) speeds up ToJson execution and reduces memory allocations.
 
 ```csharp
-[GenJson]
-[GenJsonSkipCountOptimization] // Disables usage of $MyList property
-public partial class MyClass
-{
-    public List<int> MyList { get; set; }
-}
+var myObj = new MyClass { MyList = new List<int> { 1, 2, 3 } };
+
+// Serialize with count optimization (emits "$MyList": 3 in JSON)
+string json = myObj.ToJson(useCountOptimization: true);
+
+// Deserialize using count optimization (utilizes "$MyList": 3 to pre-allocate)
+var deserialized = MyClass.FromJson(json, useCountOptimization: true);
 ```
+
+### 12. Custom Collections and Dictionaries
+
+GenJson supports custom dictionary and collection classes (concrete types)
+
+**Requirements**:
+- The custom class must be a concrete type (neither abstract nor an interface).
+- It must have a constructor that is either parameterless or accepts a single `int` parameter (for pre-allocating capacity). The generator will automatically detect and use the capacity constructor if available.
+- It must implement `IDictionary<TKey, TValue>` or `ICollection<T>`.
 
 ## How It Works
 
@@ -386,3 +527,41 @@ GenJson analyzes your code during compilation and generates specialized serializ
 
 - **Serialization**: It pre-calculates the exact size needed for the JSON string and uses `string.Create` to fill the content directly via a `Span<char>`. This avoids the "double allocation" problem of `StringBuilder` (buffer resizing + final string) and eliminates allocations for formatting numbers and other primitives.
 - **Deserialization**: It generates a recursive descent parser that operates on `ReadOnlySpan<char>`, avoiding substring allocations during parsing.
+
+## System.Text.Json Integration
+
+If you want to serialize your JSON on the server using Microsoft's `System.Text.Json` (STJ) and deserialize it on the client (e.g., Unity) using `GenJson`, you can use the **`GenJson.SystemTextJson`** bridging library.
+
+This bridge automatically translates GenJson custom attributes and formatting rules into System.Text.Json options, ensuring that the serialized JSON is perfectly compatible with the client-side parser.
+
+### Key Compatibility Rules
+
+GenJson's high-performance parser has specific requirements for incoming JSON:
+1. **Minified JSON**: It does not tolerate whitespace or line breaks. The server must serialize with `WriteIndented = false` (default).
+2. **Ignored Null Values**: In `#nullable enable` contexts, non-nullable reference properties will cause parsing to fail if explicitly sent as `null` (e.g. `"Name": null`). The server must omit null values.
+3. **Special Float Literals**: Floating-point `NaN` and `Infinity` must be written as JSON strings (e.g. `"NaN"`), which STJ supports via `JsonNumberHandling.AllowNamedFloatingPointLiterals`.
+
+### Usage
+
+1. Reference the `GenJson.SystemTextJson` package or project.
+2. Initialize `JsonSerializerOptions` on the server using `GenJsonStjOptions.CreateOptions()`:
+
+```csharp
+using System.Text.Json;
+using GenJson.SystemTextJson;
+
+// Create options that align with GenJson formatting and map custom attributes
+var options = GenJsonStjOptions.CreateOptions();
+
+// Serialize using System.Text.Json on the server
+string json = JsonSerializer.Serialize(myObject, options);
+```
+
+### Dynamic Attribute Bridging
+
+The bridge handles the translation of the following custom GenJson attributes automatically on the server:
+- **`[GenJsonPropertyName("custom_name")]`**: Maps the property name in System.Text.Json.
+- **`[GenJsonIgnore]`**: Excludes the property completely from both serialization and deserialization contracts.
+- **`[GenJsonEnumAsText]` and `[GenJsonEnumAsNumber]`**: Controls enum formatting (string vs backing number) at both the property and type levels.
+- **`[GenJsonPolymorphic]` and `[GenJsonDerivedType]`**: Maps polymorphism rules directly to System.Text.Json's native polymorphic contract options.
+- **`[GenJsonConverter(typeof(MyConverter))]`**: Automatically routes property-level or type-level custom converters to a dynamic bridge that executes your custom GenJson static methods (`GetSizeUtf8`, `WriteJsonUtf8`, `FromJsonUtf8`) inside System.Text.Json.
